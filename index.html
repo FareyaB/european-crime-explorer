@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>European Crime Atlas</title>
+<title>European Crime Atlas | Mapping Crime & Society</title>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -22,7 +22,9 @@
   --border:#cfbd97;
 }
 
-* { box-sizing:border-box; }
+* {
+  box-sizing:border-box;
+}
 
 body {
   margin:0;
@@ -40,15 +42,48 @@ header {
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
+  gap:18px;
 }
 
 .brand {
   font:700 27px "Cormorant Garamond",serif;
 }
 
-header small {
+nav {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+nav a {
   color:#e7d4a7;
-  letter-spacing:2px;
+  text-decoration:none;
+  font-size:13px;
+  padding:11px 16px;
+  border:1px solid transparent;
+  transition:.2s;
+}
+
+nav a:hover {
+  color:white;
+  border-color:var(--gold);
+}
+
+nav a.active {
+  border-color:var(--gold);
+  color:white;
+}
+
+nav a.passport {
+  background:var(--wine);
+  color:white;
+  border:1px solid var(--gold);
+}
+
+nav a.passport:hover {
+  background:#77303c;
 }
 
 .hero {
@@ -76,7 +111,9 @@ h1 {
   font-weight:600;
 }
 
-h1 em { color:var(--wine); }
+h1 em {
+  color:var(--wine);
+}
 
 .hero p {
   max-width:700px;
@@ -89,6 +126,22 @@ h1 em { color:var(--wine); }
   color:var(--gold);
   letter-spacing:14px;
   font-size:20px;
+}
+
+.hero-link {
+  display:inline-block;
+  margin-top:25px;
+  padding:15px 28px;
+  background:var(--wine);
+  color:white;
+  text-decoration:none;
+  border:1px solid var(--gold);
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.hero-link:hover {
+  background:#77303c;
 }
 
 main {
@@ -132,7 +185,9 @@ button {
   cursor:pointer;
 }
 
-button:hover { background:#77303c; }
+button:hover {
+  background:#77303c;
+}
 
 .timeline {
   background:#e9ddc4;
@@ -188,6 +243,7 @@ input[type=range] {
   align-items:center;
   border-bottom:1px solid var(--gold);
   margin:42px 0 17px;
+  gap:12px;
 }
 
 .chapter h2 {
@@ -224,15 +280,22 @@ input[type=range] {
   color:#756b58;
 }
 
-.wide { grid-column:1/-1; }
+.wide {
+  grid-column:1/-1;
+}
 
 .plot {
   width:100%;
   height:450px;
 }
 
-#map { height:530px; }
-#heatmap { height:760px; }
+#map {
+  height:530px;
+}
+
+#heatmap {
+  height:760px;
+}
 
 .notice {
   padding:20px;
@@ -249,6 +312,37 @@ input[type=range] {
   color:var(--wine);
 }
 
+.passport-feature {
+  margin-top:50px;
+  padding:45px 25px;
+  text-align:center;
+  background:var(--navy);
+  color:var(--cream);
+  border:5px double var(--gold);
+}
+
+.passport-feature h2 {
+  font-size:48px;
+  margin:12px 0;
+}
+
+.passport-feature p {
+  max-width:600px;
+  margin:15px auto;
+  line-height:1.8;
+  color:#e7d4a7;
+}
+
+.passport-feature a {
+  display:inline-block;
+  margin-top:18px;
+  padding:15px 30px;
+  background:var(--wine);
+  color:white;
+  text-decoration:none;
+  border:1px solid var(--gold);
+}
+
 footer {
   background:var(--navy);
   color:#e7d4a7;
@@ -257,40 +351,61 @@ footer {
   line-height:2;
 }
 
+footer a {
+  color:#e7d4a7;
+}
+
 @media(max-width:850px) {
   .controls,.grid {
     grid-template-columns:1fr;
   }
-  .wide { grid-column:auto; }
-  .stats { grid-template-columns:1fr; }
-  header small { display:none; }
+
+  .wide {
+    grid-column:auto;
+  }
+
+  .stats {
+    grid-template-columns:1fr;
+  }
+
+  header {
+    justify-content:center;
+    text-align:center;
+  }
+
+  nav {
+    justify-content:center;
+  }
+
+  .chapter h2 {
+    font-size:31px;
+  }
+
+  .passport-feature h2 {
+    font-size:36px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-
 <header>
   <div class="brand">✦ European Crime Atlas</div>
 
-  <nav style="display:flex;gap:20px;align-items:center;">
-    <a href="index.html"
-       style="color:#e7d4a7;text-decoration:none;">
+  <nav aria-label="Main navigation">
+    <a href="index.html" class="active">
       Home
     </a>
 
-    <a href="countries.html"
-       style="color:#e7d4a7;text-decoration:none;
-              border:1px solid #b08a48;
-              padding:10px 16px;">
+    <a href="countries.html" class="passport">
       ✦ Country Passports
     </a>
   </nav>
 </header>
 
-
 <section class="hero">
+
   <div class="eyebrow">
     An Interactive European Research Exhibition
   </div>
@@ -307,6 +422,11 @@ footer {
   </p>
 
   <div class="ornament">✦ ✧ ✦</div>
+
+  <a href="countries.html" class="hero-link">
+    Explore the Country Passports →
+  </a>
+
 </section>
 
 <main>
@@ -314,18 +434,19 @@ footer {
 <div id="status">Loading Eurostat archives…</div>
 
 <div class="controls">
+
   <div class="field">
-    <label>Crime category</label>
+    <label for="offence">Crime category</label>
     <select id="offence"></select>
   </div>
 
   <div class="field">
-    <label>Country</label>
+    <label for="country">Country</label>
     <select id="country"></select>
   </div>
 
   <div class="field">
-    <label>Socioeconomic indicator</label>
+    <label for="indicator">Socioeconomic indicator</label>
     <select id="indicator">
       <option value="gdp">GDP per capita</option>
       <option value="unemployment">Unemployment</option>
@@ -333,36 +454,49 @@ footer {
       <option value="education">Tertiary education</option>
     </select>
   </div>
+
 </div>
 
 <div class="timeline">
+
   <div class="timeline-head">
     <div>
       <div class="eyebrow">The Historical Timeline</div>
       <div class="year" id="yearText">2024</div>
     </div>
+
     <button id="play" style="width:auto">
       ▶ Play History
     </button>
   </div>
 
-  <input id="year" type="range"
-    min="2008" max="2024" value="2024">
+  <input
+    id="year"
+    type="range"
+    min="2008"
+    max="2024"
+    value="2024"
+  >
+
 </div>
 
 <div class="stats">
+
   <div class="stat">
     <strong>27</strong>
     <span>EU Countries</span>
   </div>
+
   <div class="stat">
     <strong>17</strong>
     <span>Historical Years</span>
   </div>
+
   <div class="stat">
     <strong id="count">—</strong>
     <span>Crime Observations</span>
   </div>
+
 </div>
 
 <div class="chapter">
@@ -371,6 +505,7 @@ footer {
 </div>
 
 <div class="grid">
+
   <div class="panel">
     <h3>The European Map</h3>
     <p>Click a country to explore its history.</p>
@@ -382,6 +517,7 @@ footer {
     <p>Compare recorded crime rates across Europe.</p>
     <div id="ranking" class="plot"></div>
   </div>
+
 </div>
 
 <div class="chapter">
@@ -390,17 +526,24 @@ footer {
 </div>
 
 <div class="grid">
+
   <div class="panel wide">
     <h3>Seventeen Years of European History</h3>
-    <p>Explore how crime rates changed over time.</p>
+    <p>
+      Explore how recorded crime rates changed over time.
+    </p>
     <div id="heatmap" class="plot"></div>
   </div>
 
   <div class="panel wide">
     <h3>The Country Chronicle</h3>
-    <p>Follow the selected country from 2008 to 2024.</p>
+    <p>
+      Follow the selected country's crime history
+      from 2008 to 2024.
+    </p>
     <div id="trend" class="plot"></div>
   </div>
+
 </div>
 
 <div class="chapter">
@@ -409,6 +552,7 @@ footer {
 </div>
 
 <div class="grid">
+
   <div class="panel">
     <h3>Socioeconomic Explorer</h3>
     <p>
@@ -425,6 +569,7 @@ footer {
     </p>
     <div id="correlation" class="plot"></div>
   </div>
+
 </div>
 
 <div class="chapter">
@@ -433,6 +578,7 @@ footer {
 </div>
 
 <div class="grid">
+
   <div class="panel wide">
     <h3>Social Conditions Over Time</h3>
     <p>
@@ -441,7 +587,29 @@ footer {
     </p>
     <div id="profile" class="plot"></div>
   </div>
+
 </div>
+
+<section class="passport-feature">
+
+  <div class="eyebrow" style="color:#e7d4a7">
+    The European Collection
+  </div>
+
+  <h2>✦ Country Passports ✦</h2>
+
+  <p>
+    Beyond the maps lies the story of each nation.
+    Discover 27 individual country portraits,
+    national flags, historical crime trends,
+    and socioeconomic transformations.
+  </p>
+
+  <a href="countries.html">
+    Enter the Country Gallery →
+  </a>
+
+</section>
 
 <div class="notice">
   <strong>Research note:</strong>
@@ -456,27 +624,59 @@ footer {
 
 <footer>
   ✦ EUROPEAN CRIME ATLAS ✦
-  <div>European Union · 2008–2024</div>
-  <div>Research Visualization · Source: Eurostat</div>
+
+  <div>
+    European Union · 2008–2024
+  </div>
+
+  <div>
+    <a href="index.html">Home</a>
+    &nbsp; · &nbsp;
+    <a href="countries.html">Country Passports</a>
+  </div>
+
+  <div>
+    Research Visualization · Source: Eurostat
+  </div>
 </footer>
 
 <script>
 const EU = {
-  Austria:"AUT", Belgium:"BEL", Bulgaria:"BGR",
-  Croatia:"HRV", Cyprus:"CYP", Czechia:"CZE",
-  Denmark:"DNK", Estonia:"EST", Finland:"FIN",
-  France:"FRA", Germany:"DEU", Greece:"GRC",
-  Hungary:"HUN", Ireland:"IRL", Italy:"ITA",
-  Latvia:"LVA", Lithuania:"LTU",
-  Luxembourg:"LUX", Malta:"MLT",
-  Netherlands:"NLD", Poland:"POL",
-  Portugal:"PRT", Romania:"ROU",
-  Slovakia:"SVK", Slovenia:"SVN",
-  Spain:"ESP", Sweden:"SWE"
+  Austria:"AUT",
+  Belgium:"BEL",
+  Bulgaria:"BGR",
+  Croatia:"HRV",
+  Cyprus:"CYP",
+  Czechia:"CZE",
+  Denmark:"DNK",
+  Estonia:"EST",
+  Finland:"FIN",
+  France:"FRA",
+  Germany:"DEU",
+  Greece:"GRC",
+  Hungary:"HUN",
+  Ireland:"IRL",
+  Italy:"ITA",
+  Latvia:"LVA",
+  Lithuania:"LTU",
+  Luxembourg:"LUX",
+  Malta:"MLT",
+  Netherlands:"NLD",
+  Poland:"POL",
+  Portugal:"PRT",
+  Romania:"ROU",
+  Slovakia:"SVK",
+  Slovenia:"SVN",
+  Spain:"ESP",
+  Sweden:"SWE"
 };
 
 const COUNTRIES = Object.keys(EU).sort();
-const YEARS = Array.from({length:17},(_,i)=>2008+i);
+
+const YEARS = Array.from(
+  {length:17},
+  (_,i)=>2008+i
+);
 
 const $ = id => document.getElementById(id);
 
@@ -505,21 +705,36 @@ let timer = null;
 const layout = {
   paper_bgcolor:COLORS.paper,
   plot_bgcolor:COLORS.paper,
-  font:{family:"Georgia, serif",color:COLORS.navy},
-  margin:{l:65,r:25,t:25,b:55},
-  xaxis:{gridcolor:"#e6d9bf"},
-  yaxis:{gridcolor:"#e6d9bf"}
+  font:{
+    family:"Georgia, serif",
+    color:COLORS.navy
+  },
+  margin:{
+    l:65,r:25,t:25,b:55
+  },
+  xaxis:{
+    gridcolor:"#e6d9bf"
+  },
+  yaxis:{
+    gridcolor:"#e6d9bf"
+  }
 };
 
 function draw(id,traces,extra={}) {
   Plotly.react(
-    id,traces,{...layout,...extra},
-    {responsive:true,displaylogo:false}
+    id,
+    traces,
+    {...layout,...extra},
+    {
+      responsive:true,
+      displaylogo:false
+    }
   );
 }
 
 function populate(id,items) {
   $(id).innerHTML="";
+
   items.forEach(item=>{
     const option=document.createElement("option");
     option.value=item;
@@ -546,17 +761,26 @@ function parseCSV(text) {
 async function loadData() {
   try {
     const entries=await Promise.all(
-      Object.entries(FILES).map(async ([key,file])=>{
-        const response=await fetch(
-          encodeURI(file)
-        );
+      Object.entries(FILES).map(
+        async ([key,file])=>{
+          const response=await fetch(
+            encodeURI(file)
+          );
 
-        if(!response.ok)
-          throw new Error("Missing file: "+file);
+          if(!response.ok) {
+            throw new Error(
+              "Missing file: "+file
+            );
+          }
 
-        const text=await response.text();
-        return [key,parseCSV(text)];
-      })
+          const text=await response.text();
+
+          return [
+            key,
+            parseCSV(text)
+          ];
+        }
+      )
     );
 
     DATA=Object.fromEntries(entries);
@@ -568,32 +792,47 @@ async function loadData() {
       value:Number(r.OBS_VALUE)
     }));
 
-    crimeMap=new Map(crime.map(r=>[
-      r.offence+"|"+r.geo+"|"+r.year,
-      r.value
-    ]));
-
-    homicide=new Map(
-      crime.filter(r=>
-        r.offence==="Intentional homicide"
-      ).map(r=>[
-        r.geo+"|"+r.year,r.value
+    crimeMap=new Map(
+      crime.map(r=>[
+        r.offence+"|"+r.geo+"|"+r.year,
+        r.value
       ])
     );
 
-    const offences=[...new Set(
-      crime.map(r=>r.offence)
-    )].sort();
+    const offences=[
+      ...new Set(
+        crime.map(r=>r.offence)
+      )
+    ].filter(Boolean).sort();
+
+    const homicideOffence=
+      offences.find(o=>
+        o.toLowerCase().includes("intentional homicide")
+      ) || offences[0];
+
+    homicide=new Map(
+      crime.filter(r=>
+        r.offence===homicideOffence
+      ).map(r=>[
+        r.geo+"|"+r.year,
+        r.value
+      ])
+    );
 
     populate("offence",offences);
     populate("country",COUNTRIES);
 
-    $("offence").value="Intentional homicide";
+    $("offence").value=homicideOffence;
     $("country").value="Czechia";
-    $("count").textContent=crime.length.toLocaleString();
+
+    $("count").textContent=
+      crime.length.toLocaleString();
 
     for(const key of [
-      "gdp","unemployment","poverty","education"
+      "gdp",
+      "unemployment",
+      "poverty",
+      "education"
     ]) {
       DATA[key]=new Map(
         DATA[key].map(r=>[
@@ -610,7 +849,11 @@ async function loadData() {
 
     $("map").on("plotly_click",event=>{
       const code=event.points?.[0]?.location;
-      const country=COUNTRIES.find(c=>EU[c]===code);
+
+      const country=COUNTRIES.find(
+        c=>EU[c]===code
+      );
+
       if(country) {
         $("country").value=country;
         renderAll();
@@ -618,6 +861,8 @@ async function loadData() {
     });
 
   } catch(error) {
+    console.error(error);
+
     $("status").textContent=
       "Could not load datasets: "+error.message;
   }
@@ -629,7 +874,9 @@ function getCrime(country,year,offence) {
   );
 }
 
-function year() { return Number($("year").value); }
+function year() {
+  return Number($("year").value);
+}
 
 function renderCrime() {
   const y=year();
@@ -656,21 +903,28 @@ function renderCrime() {
       [1,"#79364a"]
     ],
     marker:{
-      line:{color:"#fffaf0",width:.8}
+      line:{
+        color:"#fffaf0",
+        width:.8
+      }
     },
     hovertemplate:
       "%{text}<br>%{z:.2f}<extra></extra>"
   }],{
     geo:{
       scope:"europe",
-      projection:{type:"natural earth"},
+      projection:{
+        type:"natural earth"
+      },
       showframe:false,
       showland:true,
       landcolor:"#e9dec6",
       bgcolor:COLORS.paper,
       fitbounds:"locations"
     },
-    margin:{l:0,r:0,t:0,b:0}
+    margin:{
+      l:0,r:0,t:0,b:0
+    }
   });
 
   rows.sort((a,b)=>a.value-b.value);
@@ -682,14 +936,21 @@ function renderCrime() {
     y:rows.map(r=>r.country),
     marker:{
       color:rows.map(r=>
-        r.country===country ?
-          COLORS.wine : COLORS.sage
+        r.country===country
+          ? COLORS.wine
+          : COLORS.sage
       )
     }
   }],{
-    margin:{l:110,r:20,t:10,b:50},
-    xaxis:{title:"Recorded rate per 100,000"},
-    yaxis:{automargin:true}
+    margin:{
+      l:110,r:20,t:10,b:50
+    },
+    xaxis:{
+      title:"Recorded rate per 100,000"
+    },
+    yaxis:{
+      automargin:true
+    }
   });
 
   const z=COUNTRIES.map(c=>
@@ -712,9 +973,15 @@ function renderCrime() {
       "%{y} · %{x}<br>%{z:.2f}<extra></extra>"
   }],{
     height:760,
-    margin:{l:115,r:50,t:20,b:50},
-    xaxis:{dtick:2},
-    yaxis:{autorange:"reversed"}
+    margin:{
+      l:115,r:50,t:20,b:50
+    },
+    xaxis:{
+      dtick:2
+    },
+    yaxis:{
+      autorange:"reversed"
+    }
   });
 
   const points=YEARS.map(y=>({
@@ -727,33 +994,54 @@ function renderCrime() {
     mode:"lines+markers",
     x:points.map(r=>r.year),
     y:points.map(r=>r.value),
-    line:{color:COLORS.wine,width:3},
-    marker:{color:COLORS.gold,size:8}
+    line:{
+      color:COLORS.wine,
+      width:3
+    },
+    marker:{
+      color:COLORS.gold,
+      size:8
+    }
   }],{
-    xaxis:{title:"Year",dtick:2},
-    yaxis:{title:"Rate per 100,000"}
+    xaxis:{
+      title:"Year",
+      dtick:2
+    },
+    yaxis:{
+      title:"Rate per 100,000"
+    }
   });
 }
 
 function pearson(xs,ys) {
   const n=xs.length;
-  if(n<3)return null;
 
-  const mx=xs.reduce((a,b)=>a+b,0)/n;
-  const my=ys.reduce((a,b)=>a+b,0)/n;
+  if(n<3) {
+    return null;
+  }
 
-  let numerator=0,dx=0,dy=0;
+  const mx=
+    xs.reduce((a,b)=>a+b,0)/n;
+
+  const my=
+    ys.reduce((a,b)=>a+b,0)/n;
+
+  let numerator=0;
+  let dx=0;
+  let dy=0;
 
   for(let i=0;i<n;i++) {
     const a=xs[i]-mx;
     const b=ys[i]-my;
+
     numerator+=a*b;
     dx+=a*a;
     dy+=b*b;
   }
 
-  return dx&&dy ?
-    numerator/Math.sqrt(dx*dy) : null;
+  return dx&&dy
+    ? numerator/Math.sqrt(dx*dy)
+    : null;
 }
 
 function matched(indicator,y) {
@@ -782,23 +1070,29 @@ function renderSociety() {
     text:points.map(r=>r.country),
     marker:{
       size:points.map(r=>
-        r.country===country?16:10
+        r.country===country ? 16 : 10
       ),
       color:points.map(r=>
-        r.country===country ?
-          COLORS.wine:COLORS.sage
+        r.country===country
+          ? COLORS.wine
+          : COLORS.sage
       )
     },
     hovertemplate:
       "%{text}<br>Indicator: %{x:.2f}"+
       "<br>Homicide: %{y:.2f}<extra></extra>"
   }],{
-    xaxis:{title:indicator},
-    yaxis:{title:"Homicide rate per 100,000"}
+    xaxis:{
+      title:indicator
+    },
+    yaxis:{
+      title:"Homicide rate per 100,000"
+    }
   });
 
   const correlations=YEARS.map(y=>{
     const p=matched(indicator,y);
+
     return pearson(
       p.map(r=>r.x),
       p.map(r=>r.homicide)
@@ -810,10 +1104,19 @@ function renderSociety() {
     mode:"lines+markers",
     x:YEARS,
     y:correlations,
-    line:{color:COLORS.wine,width:3},
-    marker:{color:COLORS.gold,size:8}
+    line:{
+      color:COLORS.wine,
+      width:3
+    },
+    marker:{
+      color:COLORS.gold,
+      size:8
+    }
   }],{
-    xaxis:{title:"Year",dtick:2},
+    xaxis:{
+      title:"Year",
+      dtick:2
+    },
     yaxis:{
       title:"Pearson correlation",
       range:[-1,1]
@@ -846,19 +1149,33 @@ function renderProfile() {
         name,
         x:points.map(r=>r.year),
         y:points.map(r=>
-          baseline ?
-            100*r.value/baseline : null
+          baseline
+            ? 100*r.value/baseline
+            : null
         ),
-        line:{color,width:2.5}
+        line:{
+          color,
+          width:2.5
+        }
       };
     }
   );
 
   draw("profile",traces,{
-    xaxis:{title:"Year",dtick:2},
-    yaxis:{title:"Index: first observed year = 100"},
-    legend:{orientation:"h",y:1.18},
-    margin:{l:70,r:20,t:55,b:50}
+    xaxis:{
+      title:"Year",
+      dtick:2
+    },
+    yaxis:{
+      title:"Index: first observed year = 100"
+    },
+    legend:{
+      orientation:"h",
+      y:1.18
+    },
+    margin:{
+      l:70,r:20,t:55,b:50
+    }
   });
 }
 
@@ -869,49 +1186,64 @@ function renderAll() {
 }
 
 $("offence").addEventListener(
-  "change",renderCrime
+  "change",
+  renderCrime
 );
 
 $("country").addEventListener(
-  "change",renderAll
+  "change",
+  renderAll
 );
 
 $("indicator").addEventListener(
-  "change",renderSociety
+  "change",
+  renderSociety
 );
 
-$("year").addEventListener("input",()=>{
-  renderCrime();
-  renderSociety();
-});
-
-$("play").addEventListener("click",()=>{
-  if(timer!==null) {
-    clearInterval(timer);
-    timer=null;
-    $("play").textContent="▶ Play History";
-    return;
+$("year").addEventListener(
+  "input",
+  ()=>{
+    renderCrime();
+    renderSociety();
   }
+);
 
-  if(year()===2024)$("year").value=2008;
-
-  $("play").textContent="Ⅱ Pause";
-  renderCrime();
-  renderSociety();
-
-  timer=setInterval(()=>{
-    if(year()>=2024) {
+$("play").addEventListener(
+  "click",
+  ()=>{
+    if(timer!==null) {
       clearInterval(timer);
       timer=null;
+
       $("play").textContent="▶ Play History";
       return;
     }
 
-    $("year").value=year()+1;
+    if(year()===2024) {
+      $("year").value=2008;
+    }
+
+    $("play").textContent="Ⅱ Pause";
+
     renderCrime();
     renderSociety();
-  },1200);
-});
+
+    timer=setInterval(()=>{
+      if(year()>=2024) {
+        clearInterval(timer);
+        timer=null;
+
+        $("play").textContent="▶ Play History";
+        return;
+      }
+
+      $("year").value=year()+1;
+
+      renderCrime();
+      renderSociety();
+    },1200);
+  }
+);
 
 loadData();
 </script>
